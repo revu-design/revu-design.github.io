@@ -14,7 +14,7 @@
                 if (interval) clearInterval(interval);
                 interval = setInterval(function() {
                     let iframe = document.getElementById("iframe");
-                        if ( iframe.innerHTML() ) {
+                        if (iframe.innerHTML) {
                         // get and check the Title (and H tags if you want)
                         var ifTitle = iframe.contentDocument.title;
                         console.log(ifTitle);
@@ -22,6 +22,7 @@
                             console.log("Not found");
                             clearInterval(interval);
                             interval = undefined;
+                            iframe.src = iframe.src;
                         } else {
                             console.log("Found");
                             clearInterval(interval);
@@ -29,9 +30,10 @@
                             element.classList.remove("hidden");
                         }
                     } else {
+                        iframe.src = iframe.src;
                         // didn't load
                     }
-                }, 1000);
+                }, 3000);
             }
 
             function stop() {
