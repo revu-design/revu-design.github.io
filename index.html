@@ -3,7 +3,7 @@
     <head>
         <title>Revu</title>
     </head>
-    <body>
+    <body onload="start()" onunload="stop()">
         <script>
             let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
             function start() {
@@ -23,7 +23,11 @@
                 .then(response => console.log(response));
             }
         </script>
-        <button onclick="start()">Start</button>
-        <button onclick="stop()">Stop</button>
+        <div>
+            Loading...
+        </div>
+<!--        <button onclick="start()">Start</button>-->
+<!--        <button onclick="stop()">Stop</button>-->
+        <iframe></iframe>
     </body>
 </html>
