@@ -13,9 +13,12 @@
 
                 if (timeout) clearTimeout(timeout);
                 interval = setTimeout(function() {
+                    let iframe = document.getElementById("iframe");
+                    let message = document.getElementById("message");
                     iframe.src = iframe.src;
                     iframe.classList.remove("hidden");
-                }, 10000);
+                    iframe.classList.add("hidden");
+                }, 20000);
             }
 
             function stop() {
@@ -50,6 +53,7 @@
         </style>
     </head>
     <body onload="start()" onunload="stop()">
+        <div id="message">Loading...</div>
         <iframe id="iframe" class="hidden" src="https://ps.revu.design" frameBorder="0"></iframe>
     </body>
 </html>
