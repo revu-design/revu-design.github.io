@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Revu</title>
+    </head>
+    <body>
+        <script>
+            let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
+            function start() {
+                exec("Start");
+            }
+
+            function stop() {
+                exec("Stop");
+            }
+            function exec(command) {
+                fetch(endpoint, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(command),
+                })
+                .then(response => response.text())
+                .then(response => console.log(response));
+            }
+        </script>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+    </body>
+</html>
