@@ -2,18 +2,42 @@
 <html>
     <head>
         <title>Revu</title>
-    </head>
-    <body onload="start()" onunload="stop()">
         <script>
             let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
+
+            let interval;
+
             function start() {
                 console.log("Starting");
                 exec("Start");
+
+                if (interval) clearInterval(interval);
+                interval = setInterval(function() {
+                    let iframe = document.getElementById("iframe");
+                        if ( iframe.innerHTML() ) {
+                        // get and check the Title (and H tags if you want)
+                        var ifTitle = iframe.contentDocument.title;
+                        console.log(ifTitle);
+                        if ( ifTitle.indexOf("404")>=0 ) {
+                            console.log("Not found");
+                            clearInterval(iframe);
+                            iframe = undefined;
+                        } else {
+                            console.log("Found");
+                            clearInterval(iframe);
+                            iframe = undefined;
+                        }
+                    } else {
+                        // didn't load
+                    }
+                    if (document.getElementById("iframe"))
+                }, 1000);
             }
 
             function stop() {
                 console.log("Stopping");
                 exec("Stop");
+                clearInterval(interval);
             }
             function exec(command) {
                 fetch(endpoint, {
@@ -25,6 +49,8 @@
                 .then(response => console.log(response));
             }
         </script>
-        <iframe src="https://ps.revu.design"></iframe>
+    </head>
+    <body onload="start()" onunload="stop()">
+        <iframe id="iframe" src="https://ps.revu.design"></iframe>
     </body>
 </html>
