@@ -7,10 +7,12 @@
         <script>
             let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
             function start() {
+                console.log("Starting");
                 exec("Start");
             }
 
             function stop() {
+                console.log("Stopping");
                 exec("Stop");
             }
             function exec(command) {
