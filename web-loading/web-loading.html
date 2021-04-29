@@ -1,0 +1,20 @@
+<template>
+    <style>
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        animation:spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    </style>
+    <img src="/web-loading/loading.png" />
+</template>

@@ -2,59 +2,17 @@
 <html>
     <head>
         <title>Revu</title>
-        <script>
-            let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
-
-            let timeout;
-
-            function start() {
-                console.log("Starting");
-                exec("Start");
-
-                if (timeout) clearTimeout(timeout);
-                interval = setTimeout(function() {
-                    let iframe = document.getElementById("iframe");
-                    let message = document.getElementById("message");
-                    iframe.src = iframe.src;
-                    iframe.classList.remove("hidden");
-                    iframe.classList.add("hidden");
-                }, 20000);
-            }
-
-            function stop() {
-                console.log("Stopping");
-                exec("Stop");
-                clearInterval(interval);
-            }
-            function exec(command) {
-                fetch(endpoint, {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(command),
-                })
-                .then(response => response.text())
-                .then(response => console.log(response));
-            }
-        </script>
+        <script type="module" src="web-component/web-component.js"></script>
         <style>
-            * {
-                margin: 0
-            }
-            .class hidden {
-                visibility: hidden;
-                display: none;
-            }
-            iframe {
-                width: 100vw;
-                height: 100vh;
-            }
             body {
+                margin: 0;
                 background-color: black;
             }
         </style>
     </head>
-    <body onload="start()" onunload="stop()">
-        <div id="message">Loading...</div>
-        <iframe id="iframe" class="hidden" frameBorder="0"></iframe>
+    <body>
+        <web-component path="web-loading"></web-component>
+        <web-component path="web-revu"></web-component>
+        <web-revu></web-revu>
     </body>
 </html>
