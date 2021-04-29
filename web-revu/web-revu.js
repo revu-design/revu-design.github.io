@@ -13,6 +13,7 @@ export default class WebRevu extends WebComponent {
     }
 
     async exec(command) {
+        console.log(`Executing: ${command}`).
         let response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -24,8 +25,7 @@ export default class WebRevu extends WebComponent {
 
     async onload(root) {
         this.root = root;
-        console.log("Starting");
-        exec("Start");
+        this.exec("Start");
         setTimeout((function(revu) {
             return function() {
                 revu.onStarted()
