@@ -7,7 +7,7 @@ export default class WebRevu extends WebComponent {
     onStarted() {
         let iframe = this.root.getElementById("iframe");
         let loading = this.root.getElementById("loading");
-        iframe.src = "https://ps.revu.design";
+        iframe.src = "https://br.ps.revu.design";
         iframe.classList.remove("hidden");
         loading.classList.add("hidden");
     }
