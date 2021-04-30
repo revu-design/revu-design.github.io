@@ -14,6 +14,8 @@ endpoints = {
 let region = new URLSearchParams(window.location.search).get("region") || "uk";
 let endpoint = endpoints[region];
 
+console.log(`Region: ${region}`)
+
 let expectedLoadingTime = 20000; // 20 seconds.
 
 export default class WebRevu extends WebComponent {
