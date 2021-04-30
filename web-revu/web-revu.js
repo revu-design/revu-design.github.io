@@ -49,11 +49,5 @@ export default class WebRevu extends WebComponent {
     async onload(root) {
         this.root = root;
         this.startInstance();
-
-        setTimeout((function(revu) {
-            return function() {
-                revu.onStarted()
-            }
-        })(this), expectedLoadingTime);
     }
 }
