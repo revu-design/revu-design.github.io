@@ -1,6 +1,6 @@
 import WebComponent from "/web-component/web-component.js"
 
-endpoints = {
+const endpoints = {
     "br": {
         lambda: "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management",
         domain: "br.ps.revu.design"
