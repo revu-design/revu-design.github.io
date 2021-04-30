@@ -1,21 +1,33 @@
 import WebComponent from "/web-component/web-component.js"
 
-let endpoint = "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management"
-let domain = "br.ps.revu.design";
+endpoints = {
+    "br": {
+        lambda: "https://f4do7hzoab.execute-api.sa-east-1.amazonaws.com/default/ec-management",
+        domain: "br.ps.revu.design"
+    },
+    "uk": {
+        lambda: "https://nyfoadnk5k.execute-api.eu-west-2.amazonaws.com/default/ec-management",
+        domain: "uk.ps.revu.design"
+    }
+}
+
+let region = new URLSearchParams(window.location.search).get("region") || "uk";
+let endpoint = endpoints[region];
+
 let expectedLoadingTime = 20000; // 20 seconds.
 
 export default class WebRevu extends WebComponent {
     onStarted() {
         let iframe = this.root.getElementById("iframe");
         let loading = this.root.getElementById("loading");
-        iframe.src = `https://${domain}`;
+        iframe.src = `https://${endpoint.domain}`;
         iframe.classList.remove("hidden");
         loading.classList.add("hidden");
     }
 
     async exec(command) {
         console.log(`Executing: ${command}`);
-        let response = await fetch(endpoint, {
+        let response = await fetch(endpoint.lambda, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(command),
@@ -26,7 +38,7 @@ export default class WebRevu extends WebComponent {
 
     startInstance() {
         this.exec("Start");
-        this.ws = new WebSocket(`wss://${domain}`);
+        this.ws = new WebSocket(`wss://${endpoint.domain}`);
         this.ws.onopen = (function(revu) {
             return function() {
                 revu.ws.close();
