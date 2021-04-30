@@ -37,7 +37,11 @@ export default class WebRevu extends WebComponent {
 
         this.ws.onerror = (function(revu) {
             return function() {
-                revu.startInstance(); // We try again.
+                setTimeout((function(revu) {
+                    return function() {
+                        revu.startInstance(); // We try again.
+                    }
+                })(revu), 1000);
             }
         })(this);
     }
